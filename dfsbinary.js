@@ -1,0 +1,113 @@
+// Class to represent a node in a binary tree.
+class Node {
+    // Constructor initializes a node with the provided value.
+    constructor(value) {
+        this.value = value;  // Stores the value of the node.
+        this.left = null;    // Initializes the left child to null.
+        this.right = null;   // Initializes the right child to null.
+    }
+}
+
+// Class definition for a binary search tree.
+class BinarySearchTree {
+    // Constructor initializes the root of the tree to null, indicating an empty tree.
+    constructor() {
+        this.root = null;  // Sets the root of the BST to null.
+    }
+
+    // Method to check if the BST is empty.
+    isEmpty() {
+        return this.root === null;  // Returns true if the root is null, else false.
+    }
+
+    // Method to insert a new value into the BST.
+    insert(value) {
+        const newNode = new Node(value);  // Instantiates a node with the specified value.
+        if (this.isEmpty()) {
+            this.root = newNode;  // If the tree is empty, set the new node as the root.
+        } else {
+            this.insertNode(this.root, newNode);  // Otherwise, find the correct position for the new node.
+        }
+    }
+
+    // Private helper method to recursively insert a node into the BST.
+    insertNode(root, newNode) {
+        if (newNode.value < root.value) {
+            if (root.left === null) {
+                root.left = newNode;  // Insert new node as left child if left is null.
+            } else {
+                this.insertNode(root.left, newNode);  // Recur on the left subtree.
+            }
+        } else {
+            if (root.right === null) {
+                root.right = newNode;  // Insert new node as right child if right is null.
+            } else {
+                this.insertNode(root.right, newNode);  // Recur on the right subtree.
+            }
+        }
+    }
+
+    // Method to search for a value in the BST.
+    search(root, value) {
+        if (!root) {
+            return false;  // If the node is null, value is not found.
+        } else if (value === root.value) {
+            return true;  // Return true if the node's value matches the search value.
+        } else if (value < root.value) {
+            return this.search(root.left, value);  // Search in the left subtree.
+        } else {
+            return this.search(root.right, value);  // Search in the right subtree.
+        }
+    }
+
+    // Method to perform preorder traversal (Root, Left, Right).
+    preorder(root) {
+        if (root) {
+            console.log(root.value);  // Print root value.
+            this.preorder(root.left);  // Recur on the left subtree.
+            this.preorder(root.right);  // Recur on the right subtree.
+        }
+    }
+
+    // Method to perform inorder traversal (Left, Root, Right).
+    inorder(root) {
+        if (root) {
+            this.inorder(root.left);  // Recur on the left subtree.
+            console.log(root.value);  // Print root value.
+            this.inorder(root.right);  // Recur on the right subtree.
+        }
+    }
+
+    // Method to perform postorder traversal (Left, Right, Root).
+    postorder(root) {
+        if (root) {
+            this.postorder(root.left);  // Recur on the left subtree.
+            this.postorder(root.right);  // Recur on the right subtree.
+            console.log(root.value);  // Print root value.
+        }
+    }
+}
+
+// Instantiate a BinarySearchTree.
+const bst = new BinarySearchTree();
+
+// Check if the tree is empty and print the result.
+console.log('Tree is empty?', bst.isEmpty());
+
+// Insert values into the BST.
+bst.insert(10);
+bst.insert(5);
+bst.insert(15);
+bst.insert(3);
+bst.insert(7);
+
+// Search for values in the BST and print the results.
+console.log(bst.search(bst.root, 10));  // Searches for 10.
+console.log(bst.search(bst.root, 5));   // Searches for 5.
+console.log(bst.search(bst.root, 15));  // Searches for 15.
+console.log(bst.search(bst.root, 20));  // Searches for 20, expected to be false.
+
+// Perform and print the results of different tree traversals.
+bst.preorder(bst.root);  // Outputs values in preorder.
+bst.inorder(bst.root);   // Outputs values in inorder.
+bst.postorder(bst.root); // Outputs values in postorder.
