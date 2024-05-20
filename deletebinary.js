@@ -47,46 +47,6 @@ class BinarySearchTree {
         }
     }
 
-    // Method to search for a value in the BST.
-    search(root, value) {
-        if (!root) {
-            return false;  // If the node is null, value is not found.
-        } else if (value === root.value) {
-            return true;  // Return true if the node's value matches the search value.
-        } else if (value < root.value) {
-            return this.search(root.left, value);  // Search in the left subtree.
-        } else {
-            return this.search(root.right, value);  // Search in the right subtree.
-        }
-    }
-
-    // Method to perform preorder traversal (Root, Left, Right).
-    preorder(root) {
-        if (root) {
-            console.log(root.value);  // Print root value.
-            this.preorder(root.left);  // Recur on the left subtree.
-            this.preorder(root.right);  // Recur on the right subtree.
-        }
-    }
-
-    // Method to perform inorder traversal (Left, Root, Right).
-    inorder(root) {
-        if (root) {
-            this.inorder(root.left);  // Recur on the left subtree.
-            console.log(root.value);  // Print root value.
-            this.inorder(root.right);  // Recur on the right subtree.
-        }
-    }
-
-    // Method to perform postorder traversal (Left, Right, Root).
-    postorder(root) {
-        if (root) {
-            this.postorder(root.left);  // Recur on the left subtree.
-            this.postorder(root.right);  // Recur on the right subtree.
-            console.log(root.value);  // Print root value.
-        }
-    }
-
     levelorder() {
         const queue = []
         queue.push(this.root)
